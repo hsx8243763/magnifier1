@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+			}
+			#box{
+				width: 480px;
+				height: 480px;
+			}
+			img{
+				width: 480px;
+				height: 480px;
+			}
+			#span{
+				width: 120px;
+				height: 120px;
+				border-radius: 50%;
+				position: absolute;
+				background-image: url(img/IMG_3780.JPG);
+				opacity:0.9;
+				display: none;
+			}
+			#span2{
+				width: 60px;
+				height: 60px;
+				border-radius: 50%;
+				position: absolute;
+				background-color: #000000;
+				opacity:0;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<span id="span"></span>
+			<span id="span2"></span>
+			<img src="img/IMG_3780.JPG"/>
+		</div>
+		<script type="text/javascript">
+			var box = document.getElementById("box");
+			var span = document.getElementById("span");
+			var span2 = document.getElementById("span2");
+			var img = document.getElementsByTagName('img')[0];
+			box.onmouseover = function(){
+				span.style.display = 'block';
+				span2.style.display = 'block';
+			}
+			box.onmouseout = function(){
+				span.style.display = '';
+				span2.style.display = '	';
+			}
+			console.log(box.offsetWidth)
+			box.onmousemove = function(ev){
+				var l = ev.clientX - span.offsetWidth/2 - box.offsetLeft;
+				var t = ev.clientY - span.offsetHeight/2 - box.offsetTop;
+				var l1 = ev.clientX - span2.offsetWidth/2 - box.offsetLeft;
+				var t1 = ev.clientY - span2.offsetHeight/2 - box.offsetTop;
+				var maxL = box.offsetWidth - span.offsetWidth;
+				var maxT = box.offsetHeight - span.offsetHeight;
+				var maxL1 = box.offsetWidth - span2.offsetWidth;
+				var maxT1 = box.offsetHeight - span2.offsetHeight;
+				if(l < 0){
+					l = 0;
+				}
+				if(t < 0){
+					t = 0;
+				}
+				if(l > maxL){
+					l = maxL;
+				}
+				if(t > maxT){
+					t = maxT;
+				}
+				if(l1 < 0){
+					l1 = 0;
+				}
+				if(t1 < 0){
+					t1 = 0;
+				}
+				if(l1 > maxL1){
+					l1 = maxL1;
+				}
+				if(t1 > maxT1){
+					t1 = maxT1;
+				}
+				span.style.left = l + 'px';
+				span.style.top = t + 'px';
+				span2.style.left = l1 + 'px';
+				span2.style.top = t1 + 'px';
+				span.style.backgroundPositionX = -l1/maxL1*(box.offsetWidth*2-span.offsetWidth) + 'px';
+				span.style.backgroundPositionY = -t1/maxT1*(box.offsetHeight*2-span.offsetHeight) + 'px';
+			}
+		</script>
+	</body>
+</html>

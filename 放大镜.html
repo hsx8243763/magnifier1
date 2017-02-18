@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#left{
+				width: 300px;
+				height: 300px;
+				position: absolute;
+				top: 28px;
+				left: 10px;
+			}
+			#left span{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				background: #000000;
+				opacity: 0.5;
+				top:0;
+				left: 0;
+				display: none;
+			}
+			#left img{
+				width: 300px;
+				height: 300px;
+			}
+			#right{
+				width: 300px;
+				height: 300px;
+				background-image: url(img/IMG_3780.JPG);
+				position: absolute;
+				top: 28px;
+				left: 350px;
+				display: none;
+			}
+			#right{
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="left">
+			<span id="span"></span>
+			<img src="img/IMG_3780.JPG"/>
+		</div>
+		<div id="right">
+		</div>
+		<script>
+			var left = document.getElementById("left");
+			var span = document.getElementById("span");
+			var right = document.getElementById("right");
+			left.onmouseover = function(){
+				span.style.display = 'block';
+				right.style.display = 'block';
+			}
+			left.onmouseout = function(){
+				span.style.display = '';
+				right.style.display = '';
+			}
+			left.onmousemove = function(ev){
+				var l = ev.clientX - span.offsetWidth/2 - left.offsetLeft;
+				var t = ev.clientY - span.offsetHeight/2 - left.offsetTop;
+				var maxL = left.offsetWidth -span.offsetWidth;
+				var maxT = left.offsetHeight -span.offsetHeight;
+				if(l < 0){
+					l = 0
+				}
+				if(t < 0){
+					t = 0
+				}
+				if(l > maxL){
+					l = maxL;
+				}
+				if(t > maxT){
+					t = maxT;
+				}
+				span.style.left = l + 'px';
+				span.style.top = t+ 'px';
+				right.style.backgroundPositionX = -l/maxL*(600)+'px';
+				right.style.backgroundPositionY = -t/maxT*(600)+'px';
+			}
+		</script>
+	</body>
+</html>
